@@ -1,9 +1,11 @@
 const path = require('path')
 const fs = require('fs')
+
 const merge = require('deepmerge')
+const prettier = require('prettier')
 
 function useFrameworkConfig(defaultConfig = {}) {
-  const framework = 'shopify' // dynamically incorporate hardcoded val in future
+  const framework = defaultConfig?.framework.name
 
   // project-specific config
   const fwkNextConfig = require(path.join('../', framework, 'next.config'))
@@ -16,7 +18,10 @@ function useFrameworkConfig(defaultConfig = {}) {
   tsConfig.compilerOptions.paths['@framework'] = [`framework/${framework}`]
   tsConfig.compilerOptions.paths['@framework/*'] = [`framework/${framework}/*`]
 
-  fs.writeFileSync(tsPath, JSON.stringify(tsConfig, null, 2))
+  fs.writeFileSync(
+    tsPath,
+    prettier.format(JSON.stringify(tsConfig), { parser: 'json' })
+  )
 
   return config
 }
