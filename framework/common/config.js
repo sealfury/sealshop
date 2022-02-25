@@ -14,7 +14,6 @@ const errorColors = {
 
 function useFrameworkConfig(defaultConfig = {}) {
   let framework = defaultConfig?.framework?.name
-
   // color is provided in ANSI escape sequence
   const generateMessage = options =>
     options.map(option => option.color + option.message).join(' ')
