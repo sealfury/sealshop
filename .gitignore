@@ -4,6 +4,9 @@ schema.d.ts
 # compiled/minified post-css output
 /assets/main_browser.css
 
+# temporary image src
+/public/mr-seal-yo-girl.svg
+
 # dependencies
 /node_modules
 /.pnp
