@@ -1,6 +1,18 @@
 .root {
-  @apply relative;
+  @apply relative max-h-full;
 
+  /* 'raises' product against background on hover */
+  &:hover {
+    & .productBackground:before {
+      transform: scale(0.99);
+    }
+
+    & .productImage {
+      transform: scale(1.15);
+    }
+  }
+
+  /* cycle product background colour */
   &:nth-child(6n + 1) .productBackground {
     @apply bg-violet;
   }
@@ -18,13 +30,20 @@
   }
 }
 
+.productImage {
+  /* less abrupt raising of product against background */
+  @apply transition-transform duration-500 block;
+}
+
 .productBackground {
   @apply absolute inset-0 z-0;
   background-color: #212529;
 
+  /* placeholder background during load */
   &:before {
-    @apply block w-full h-full bg-repeat-space;
+    @apply transition-transform duration-500 block w-full h-full bg-repeat-space;
     content: '';
+    /* provides a sort of textured underlay to background color */
     background-image: url('/prod-background-pattern.svg');
   }
 }
@@ -43,12 +62,12 @@
   line-height: 2.2em;
 
   & span {
-    @apply py-4 px-6;
+    @apply py-4 px-6 bg-primary;
     box-decoration-break: clone;
   }
 }
 
 .productPrice {
-  @apply pb-4 pt-2 px-6 font-semibold text-sm;
+  @apply bg-primary pb-4 pt-2 px-6 font-semibold text-sm;
   letter-spacing: 0.4px;
 }
