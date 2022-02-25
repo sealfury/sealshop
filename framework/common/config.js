@@ -19,7 +19,7 @@ function useFrameworkConfig(defaultConfig = {}) {
       // color is provided in ANSI escape sequence
       return options.map(option => {
         return option.color + option.message
-      })
+      }).join(" ")
     }
 
   if (!framework) {
