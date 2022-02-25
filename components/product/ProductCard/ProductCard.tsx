@@ -6,7 +6,7 @@ interface CardProps {
   product: Product
 }
 
-const tempImgPath = '/mr-seal-yo-girl.svg'
+const placeHolder = '/mr-seal-yo-girl.svg'
 
 const ProductCard: React.FC<CardProps> = ({ product }) => {
   return (
@@ -21,7 +21,7 @@ const ProductCard: React.FC<CardProps> = ({ product }) => {
         {product.images && (
           <Image
             alt={product.name ?? 'Product Image'}
-            src={tempImgPath}
+            src={product.images[0].url ?? placeHolder}
             height={540}
             width={540}
             quality='85'
