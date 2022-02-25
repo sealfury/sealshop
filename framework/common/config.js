@@ -7,26 +7,43 @@ const prettier = require('prettier')
 const PERMITTED_FRAMEWORKS = ['shopify', 'big-commerce', 'shopify_local']
 const FALLBACK_FRAMEWORK = 'shopify'
 
+const errorColors = {
+  PINKISH: '\033[38;2;219;55;107m',
+  BURNT_ORANGE: '\033[38;2;250;176;17m',
+}
+
 function useFrameworkConfig(defaultConfig = {}) {
   let framework = defaultConfig?.framework?.name
-
-  // ANSI escape sequence -> kind of a pinkish colour
-  const coloredMissingError =
-    '\033[38;2;219;55;107mAPI Framework Is Missing. Please Add A Valid Provider!'
-
-  // Kind of a burnt orange colour
-  const coloredInvalidError =
-    '\033[38;2;250;176;17mThe provided framework "' +
-    framework +
-    '\033[38;2;250;176;17m" cannot be found. Try using one of these instead: ' +
-    PERMITTED_FRAMEWORKS.join(', ')
+  // color is provided in ANSI escape sequence
+  const generateMessage = options =>
+    options.map(option => option.color + option.message).join(' ')
 
   if (!framework) {
-    throw new Error(coloredMissingError)
+    throw new Error(
+      generateMessage([
+        {
+          color: errorColors.PINKISH,
+          message: 'API Framework Is Missing. Please Add A Valid Provider!',
+        },
+      ])
+    )
   }
 
   if (!PERMITTED_FRAMEWORKS.includes(framework)) {
-    throw new Error(coloredInvalidError)
+    throw new Error(
+      generateMessage([
+        {
+          color: errorColors.BURNT_ORANGE,
+          message: `The provided framework "${framework}"`,
+        },
+        {
+          color: errorColors.BURNT_ORANGE,
+          message: `cannot be found.\n Try using one of these instead: ${PERMITTED_FRAMEWORKS.join(
+            ' | '
+          )}`,
+        },
+      ])
+    )
   }
 
   if (framework === 'shopify_local') {

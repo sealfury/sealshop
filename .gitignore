@@ -1,6 +1,9 @@
 # temp schema types
 schema.d.ts
 
+# compiled/minified post-css output
+/assets/main_browser.css
+
 # dependencies
 /node_modules
 /.pnp
