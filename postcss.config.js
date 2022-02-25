@@ -4,5 +4,5 @@ module.exports = {
 
 // manual testing config
 // module.exports = {
-//   plugins: [require('tailwindcss')],
+//   plugins: [require('tailwindcss'), require('autoprefixer')],
 // }
