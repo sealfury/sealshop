@@ -9,34 +9,45 @@ const FALLBACK_FRAMEWORK = 'shopify'
 
 const errorColors = {
   PINKISH: '\033[38;2;219;55;107m',
-  BURNT_ORANGE: '\033[38;2;250;176;17m'
+  BURNT_ORANGE: '\033[38;2;250;176;17m',
 }
 
 function useFrameworkConfig(defaultConfig = {}) {
   let framework = defaultConfig?.framework?.name
-  
-    function generateMessage(options) {
-      // color is provided in ANSI escape sequence
-      return options.map(option => {
-        return option.color + option.message
-      })
-    }
+
+  function generateMessage(options) {
+    // color is provided in ANSI escape sequence
+    return options.map(option => {
+      return option.color + option.message
+    })
+  }
 
   if (!framework) {
-    throw new Error(generateMessage([{
-      color: errorColors.PINKISH,
-      message: 'API Framework Is Missing. Please Add A Valid Provider!'
-    }]))
+    throw new Error(
+      generateMessage([
+        {
+          color: errorColors.PINKISH,
+          message: 'API Framework Is Missing. Please Add A Valid Provider!',
+        },
+      ])
+    )
   }
 
   if (!PERMITTED_FRAMEWORKS.includes(framework)) {
-    throw new Error(generateMessage([{
-      color: errorColors.BURNT_ORANGE,
-      message: `The provided framework "${framework}"`
-    },{
-      color: errorColors.BURNT_ORANGE,
-      message: `cannot be found. Try using one of these instead: ${PERMITTED_FRAMEWORKS.join(', ')}`
-    }]))
+    throw new Error(
+      generateMessage([
+        {
+          color: errorColors.BURNT_ORANGE,
+          message: `The provided framework "${framework}"`,
+        },
+        {
+          color: errorColors.BURNT_ORANGE,
+          message: `cannot be found.\n Try using one of these instead: ${PERMITTED_FRAMEWORKS.join(
+            ' | '
+          )}`,
+        },
+      ])
+    )
   }
 
   if (framework === 'shopify_local') {
