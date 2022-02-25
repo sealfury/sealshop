@@ -3,7 +3,9 @@ import s from './Layout.module.css'
 const Layout: React.FC = ({ children }) => {
   return (
     <div className={s.root}>
-      <main className='fit'>{children}</main>
+      <main style={{ color: 'var(--primary)' }} className='fit'>
+        {children}
+      </main>
     </div>
   )
 }
