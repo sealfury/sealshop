@@ -5,7 +5,11 @@ interface MarqueeProps {
 }
 
 const Marquee: React.FC<MarqueeProps> = ({ children }) => {
-  return <div className='marquee'>{children}</div>
+  return (
+    <div className={s.root}>
+      <div className={s.marqueeWrapper}>{children}</div>
+    </div>
+  )
 }
 
 export default Marquee

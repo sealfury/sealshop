@@ -17,7 +17,25 @@ const ProductCard: React.FC<CardProps> = ({ product, variant = 'simple' }) => {
     <Link href={`/products/${product.slug}`}>
       <a className={s.root}>
         {variant === 'slim' ? (
-          <div>TEMP SLIM PRODUCT VARIANT</div>
+          <div>
+            {/* inherits flex styling from marquee component */}
+            <div className='inset-0.5 flex items-center justify-center absolute z-20'>
+              <span className='bg-violet-dark text-cyan p-3 font-bold text-lg'>
+                {product.name}
+              </span>
+            </div>
+            {product.images && (
+              <Image
+                className={s.productImage}
+                alt={product.name ?? 'Product Image'}
+                src={product.images[0].url ?? placeHolder}
+                height={320}
+                width={320}
+                quality='85'
+                layout='fixed'
+              />
+            )}
+          </div>
         ) : (
           <>
             <div className={s.productBackground}></div>
