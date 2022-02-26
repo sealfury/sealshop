@@ -1,13 +1,13 @@
 .root {
-  @apply grid grid-cols-1 py-32;
+  @apply flex flex-col py-32 justify-center;
 
   @screen md {
-    @apply grid-cols-2;
+    @apply flex-row;
   }
 }
 
 .banner {
-  @apply text-4xl leading-10 font-extrabold text-white
+  @apply flex-1 max-w-xl text-4xl leading-10 font-extrabold text-white
         /* small screen opts */
         sm:text-5xl sm:leading-none sm:tracking-tight
         /* large screen opts */
@@ -18,6 +18,10 @@
   @apply mt-5 text-xl leading-7 text-white;
 }
 
+.descWrapper {
+  @apply flex-1 max-w-4xl;
+}
+
 .link {
-  @apply text-white pt-3 font-bold hover:underline cursor-pointer;
+  @apply block text-white pt-6 font-bold cursor-pointer hover:text-indigo-400 text-xl;
 }

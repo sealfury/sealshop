@@ -13,7 +13,7 @@ const Hero: React.FC<HeroProps> = ({ banner, description }) => {
       <Container>
         <div className={s.root}>
           <h2 className={s.banner}>{banner}</h2>
-          <div>
+          <div className={s.descWrapper}>
             <p className={s.description}>{description}</p>
             <Link href='/'>
               <a className={s.link}>Get back home</a>
