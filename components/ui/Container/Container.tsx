@@ -1,10 +1,16 @@
+import { ReactNode, ComponentType, HTMLAttributes, FC } from 'react'
+
 interface ContainerProps {
   /* Accept one or multiple children */
-  children: React.ReactNode | React.ReactNode[]
+  children: ReactNode | ReactNode[]
+  element?: ComponentType<HTMLAttributes<HTMLElement>>
 }
 
-const Container: React.FC<ContainerProps> = ({ children }) => {
-  return <div className='px-6 mx-auto max-w-8xl'>{children}</div>
+const Container: FC<ContainerProps> = ({
+  children,
+  element: Element = 'div',
+}) => {
+  return <Element className='px-6 mx-auto max-w-8xl'>{children}</Element>
 }
 
 export default Container
