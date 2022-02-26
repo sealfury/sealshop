@@ -16,8 +16,6 @@
 }
 
 .layoutA {
-  /* 1, 7, 13, */
-  /* 5, 11, 17 */
   & > *:nth-child(6n + 1),
   & > *:nth-child(6n + 5) {
     @screen lg {
@@ -27,5 +25,10 @@
 }
 
 .layoutB {
-  color: blue;
+  & > *:nth-child(6n + 2),
+  & > *:nth-child(6n + 4) {
+    @screen lg {
+      @apply col-span-2 row-span-2;
+    }
+  }
 }
