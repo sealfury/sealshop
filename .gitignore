@@ -4,6 +4,12 @@ schema.d.ts
 # compiled/minified post-css output
 /assets/main_browser.css
 
+# temporary local image src 
+# will ultimately be replaced by images from shopify/customer's api
+/public/mr-seal-yo-girl.svg
+/public/prod-background-pattern.svg
+/public/images
+
 # dependencies
 /node_modules
 /.pnp
