@@ -3,7 +3,7 @@ import getAllProducts from '@framework/product/get-all-products'
 import { getApiConfig } from '@framework/api/config'
 import { Layout } from '@components/common'
 import { ProductCard } from '@components/product'
-import { Grid } from '@components/ui'
+import { Grid, Hero } from '@components/ui'
 
 export const getStaticProps = async () => {
   const apiConfig = getApiConfig()
@@ -28,6 +28,10 @@ export default function Home({
           <ProductCard key={product.id} product={product} />
         ))}
       </Grid>
+      <Hero
+        banner='Is For Stinas?'
+        description='Cupcake ipsum dolor sit amet biscuit. I love I love pie caramels dessert. Carrot cake jujubes cake cheesecake cupcake soufflé.'
+      />
     </>
   )
 }
