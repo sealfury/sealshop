@@ -1,0 +1,15 @@
+.root {
+  @apply flex flex-row md:py-6;
+}
+
+.navLogo {
+  @apply text-2xl font-bold text-indigo-800;
+}
+
+.navLink {
+  @apply text-accents-6 leading-6 font-medium transition;
+
+  &:hover {
+    @apply text-violet-dark;
+  }
+}
