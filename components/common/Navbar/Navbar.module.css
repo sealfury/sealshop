@@ -7,9 +7,9 @@
 }
 
 .navLink {
-  @apply text-accents-6 leading-6 font-medium transition duration-500;
+  @apply text-accents-6 leading-6 font-medium transition duration-300;
 
   &:hover {
-    @apply text-violet-dark transition scale-110 duration-500;
+    @apply text-violet-dark;
   }
 }

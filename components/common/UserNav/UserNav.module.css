@@ -7,6 +7,6 @@
         mr-6 cursor-pointer transition;
 
   &:hover {
-    @apply text-accents-6 transition scale-110;
+    @apply text-accents-6 scale-110;
   }
 }
