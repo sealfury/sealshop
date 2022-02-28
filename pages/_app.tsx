@@ -1,4 +1,5 @@
 import '@assets/main.css'
+import { UIContextProvider } from '@components/ui/context'
 import { AppProps } from 'next/app'
 
 const Noop: React.FC = ({ children }) => <>{children}</>
@@ -10,9 +11,11 @@ const _App = ({
   const Layout = Component.Layout ?? Noop
 
   return (
-    <Layout>
-      <Component {...pageProps} />
-    </Layout>
+    <UIContextProvider>
+      <Layout>
+        <Component {...pageProps} />
+      </Layout>
+    </UIContextProvider>
   )
 }
 
