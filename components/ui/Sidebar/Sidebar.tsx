@@ -1,3 +1,10 @@
+import { useEffect, useRef } from 'react'
+import {
+  disableBodyScroll,
+  enableBodyScroll,
+  clearAllBodyScrollLocks,
+} from 'body-scroll-lock'
+
 interface SidebarProps {
   children: any
   isOpen: boolean
@@ -5,10 +12,29 @@ interface SidebarProps {
 }
 
 const Sidebar: React.FC<SidebarProps> = ({ children, isOpen, onClose }) => {
+  const sidebarRef = useRef<HTMLDivElement>()
+
+  useEffect(() => {
+    if (sidebarRef.current) {
+      if (isOpen) {
+        disableBodyScroll(sidebarRef.current)
+      } else {
+        enableBodyScroll(sidebarRef.current)
+      }
+    }
+    // cleanup scroll locks when sidebar is closed
+    return () => {
+      clearAllBodyScrollLocks()
+    }
+  }, [isOpen])
+
   return (
     <>
       {isOpen ? (
-        <div className='fixed inset-0 overflow-hidden h-full z-50'>
+        <div
+          ref={sidebarRef}
+          className='fixed inset-0 overflow-hidden h-full z-50'
+        >
           <div className='absolute inset-0 overflow-hidden'>
             <div
               className='absolute inset-0 bg-black bg-opacity-50 transition-opacity'

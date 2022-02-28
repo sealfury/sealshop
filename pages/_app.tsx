@@ -1,5 +1,5 @@
 import '@assets/main.css'
-import { UIContextProvider, useUIContext } from '@components/ui/context'
+import { UIContextProvider } from '@components/ui/context'
 import { AppProps } from 'next/app'
 
 const Noop: React.FC = ({ children }) => <>{children}</>
@@ -9,8 +9,6 @@ const _App = ({
   pageProps,
 }: AppProps & { Component: { Layout: React.FC } }) => {
   const Layout = Component.Layout ?? Noop
-  const uiContext = useUIContext()
-  console.log(uiContext)
 
   return (
     <UIContextProvider>
