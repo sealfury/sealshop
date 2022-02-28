@@ -5,12 +5,12 @@ import { CartSidebar } from '@components/cart'
 import { useUIContext } from '@components/ui/context'
 
 const Layout: React.FC = ({ children }) => {
-  const uiContext = useUIContext()
+  const { sidebarOpen, closeSidebar } = useUIContext()
 
   return (
     <div className={s.root}>
       <Navbar />
-      <Sidebar isOpen={uiContext.sidebarOpen}>
+      <Sidebar isOpen={sidebarOpen} onClose={closeSidebar}>
         <CartSidebar />
       </Sidebar>
       <main className='fit'>{children}</main>
