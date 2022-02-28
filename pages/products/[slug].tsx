@@ -4,15 +4,16 @@ import {
   GetStaticPaths,
   InferGetServerSidePropsType,
 } from 'next'
+import getAllProductPaths from '@framework/product/get-all-product-paths'
+import { getApiConfig } from '@framework/api/config'
 
 /* fetch product slugs - syntax mandatory w/ nextjs */
 export const getStaticPaths: GetStaticPaths = async () => {
+  const config = getApiConfig()
+  const { products } = await getAllProductPaths(config)
+
   return {
-    paths: [
-      { params: { slug: 'cool-hat' } },
-      { params: { slug: 't-shirt' } },
-      { params: { slug: 'lightweight-jacket' } },
-    ],
+    paths: products.map(product => ({ params: { slug: product.slug } })),
     fallback: false, // throw error for page that DNE
   }
 }
