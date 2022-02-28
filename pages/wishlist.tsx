@@ -17,7 +17,10 @@ export default function Wishlist() {
               <h2 className='pt-6 text-2xl font-bold tracking-wide text-center'>
                 Your Wishlist Is Empty
               </h2>
-              <p className='text-accents-6 px-10 text-center pt-2'></p>
+              <p className='text-accents-6 px-10 text-center pt-2'>
+                Tiramisu jujubes shortbread danish bear claw tootsie roll
+                topping.
+              </p>
             </div>
           ) : (
             <h1>Wishlist Cars To Come</h1>
