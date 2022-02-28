@@ -1,15 +1,15 @@
-import { createContext, useContext } from 'react'
+import { createContext, useContext, useState } from 'react'
 
-export const UIContext = createContext<{ [key: string]: string }>({
+export const UIContext = createContext<{ [key: string]: any }>({
   uiState: 'defaultState',
 })
 
 export const UIContextProvider: React.FC = ({ children }) => {
-  return (
-    <UIContext.Provider value={{ uiState: 'someState' }}>
-      {children}
-    </UIContext.Provider>
-  )
+  const [sidebarOpen, setSidebarOpen] = useState(false)
+
+  const uiState = { sidebarOpen, setSidebarOpen }
+
+  return <UIContext.Provider value={uiState}>{children}</UIContext.Provider>
 }
 
 export const useUIContext = () => {
