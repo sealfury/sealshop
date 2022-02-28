@@ -1,9 +1,11 @@
 import Link from 'next/link'
-import { Bag as CartIcon, Cross as CloseIcon } from '@components/icons'
 import classNames from 'classnames'
+import { Bag as CartIcon, Cross as CloseIcon } from '@components/icons'
+import { useUIContext } from '@components/ui/context'
 
 const CartSidebar: React.FC = () => {
   const isEmpty = true
+  const { closeSidebar } = useUIContext()
 
   const rootClass = classNames('h-full flex flex-col', {
     'bg-secondary text-secondary': isEmpty,
@@ -16,7 +18,7 @@ const CartSidebar: React.FC = () => {
           <div className='h-7 flex items-center'>
             <button
               className='hover:text-gray-500 transition ease-in-out duration-150'
-              onClick={() => alert('Closing Siderbar Temp alert')}
+              onClick={closeSidebar}
             >
               <CloseIcon className='h-6 w-6' />
             </button>
