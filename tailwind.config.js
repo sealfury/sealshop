@@ -7,6 +7,9 @@ module.exports = {
   ],
   theme: {
     extend: {
+      maxWidth: {
+        '8xl': '1920px',
+      },
       colors: {
         primary: 'var(--primary)',
         'primary-2': 'var(--primary-2)',
@@ -27,6 +30,7 @@ module.exports = {
         'accents-9': 'var(--accents-9)',
         violet: 'var(--violet)',
         'violet-light': 'var(--violet-light)',
+        'violet-dark': 'var(--violet-dark)',
         pink: 'var(--pink)',
         cyan: 'var(--cyan)',
         blue: 'var(--blue)',

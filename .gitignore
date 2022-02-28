@@ -10,6 +10,9 @@ schema.d.ts
 /public/prod-background-pattern.svg
 /public/images
 
+# temporary icon components borrowed from shopify
+/components/icons
+
 # dependencies
 /node_modules
 /.pnp
