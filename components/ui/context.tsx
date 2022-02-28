@@ -1,4 +1,4 @@
-import { createContext, useContext, useReducer } from 'react'
+import { createContext, useContext, useReducer, useMemo } from 'react'
 
 export interface StateModifiers {
   openSidebar: () => void
@@ -47,11 +47,14 @@ export const UIContextProvider: React.FC = ({ children }) => {
   const openSidebar = () => dispatch({ type: 'OPEN_SIDEBAR' })
   const closeSidebar = () => dispatch({ type: 'CLOSE_SIDEBAR' })
 
-  const providerValue = {
-    ...state,
-    openSidebar,
-    closeSidebar,
-  }
+  // prevent performance leak on sidebar close 
+  const providerValue = useMemo(() => {
+    return {
+      ...state,
+      openSidebar,
+      closeSidebar,
+    }
+  }, [state.sidebarOpen])
 
   return (
     <UIContext.Provider value={providerValue}>{children}</UIContext.Provider>
