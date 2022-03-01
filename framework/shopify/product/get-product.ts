@@ -1,10 +1,10 @@
 import { ApiConfig, QueryVariables } from '@common/types/api'
 import { getProductQuery, normalizeProduct } from '@framework/utils'
 import { Product as ShopifyProduct } from '@framework/schema'
-import { Product } from '@common/types/product'
+import { ProductType } from '@common/types/product'
 
 type FetchType = { productByHandle: ShopifyProduct }
-type ReturnType = { product: Product | null }
+type ReturnType = { product: ProductType | null }
 
 const getProduct = async (options: {
   config: ApiConfig

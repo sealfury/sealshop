@@ -27,7 +27,11 @@ export interface ProductVariant {
   options: ProductOption[]
 }
 
-export interface Product {
+/*
+ ** Got really sick of this competing with the
+ ** 'Product' type from the schema on imports
+ */
+export interface ProductType {
   id: string
   name: string
   description: string

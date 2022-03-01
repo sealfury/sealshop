@@ -1,10 +1,10 @@
 import { ApiConfig } from '@common/types/api'
-import { Product } from '@common/types/product'
+import { ProductType } from '@common/types/product'
 import { ProductConnection } from '@framework/schema'
 import getAllProductPathsQuery from '@framework/utils/queries/get-all-product-paths'
 
 type ReturnType = {
-  products: Pick<Product, 'slug'>[]
+  products: Pick<ProductType, 'slug'>[]
 }
 
 const getAllProductPaths = async (config: ApiConfig): Promise<ReturnType> => {

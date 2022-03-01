@@ -6,7 +6,7 @@ import {
   ProductVariantConnection,
   SelectedOption,
 } from '../schema'
-import { Product } from '@common/types/product'
+import { ProductType } from '@common/types/product'
 
 const normalizeImages = ({ edges }: { edges: ImageEdge[] }) =>
   edges.map(({ node: { originalSrc: url, ...rest } }) => {
@@ -81,7 +81,7 @@ const normalizeVariants = ({ edges }: ProductVariantConnection) => {
   })
 }
 
-export const normalizeProduct = (productNode: ShopifyProduct): Product => {
+export const normalizeProduct = (productNode: ShopifyProduct): ProductType => {
   const {
     id,
     title: name,
@@ -109,7 +109,7 @@ export const normalizeProduct = (productNode: ShopifyProduct): Product => {
           .filter(option => option.name !== 'Title')
           .map(opt => normalizeOption(opt))
       : [],
-    variants: variants ? normalizeVariants(variants) : [{}],
+    variants: variants ? normalizeVariants(variants) : [],
     ...rest,
   }
 
