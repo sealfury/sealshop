@@ -1,12 +1,12 @@
 import s from './ProductCard.module.css'
 import Link from 'next/link'
-import { Product } from '@common/types/product'
+import { ProductType } from '@common/types/product'
 import Image from 'next/image'
 
 export type ProductVariant = 'simple' | 'slim'
 
 interface CardProps {
-  product: Product
+  product: ProductType
   variant?: ProductVariant
 }
 

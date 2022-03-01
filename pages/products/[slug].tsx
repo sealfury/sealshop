@@ -6,6 +6,7 @@ import {
 } from 'next'
 import { getAllProductPaths, getProduct } from '@framework/product'
 import { getApiConfig } from '@framework/api/config'
+import { ProductView } from '@components/product'
 
 /* fetch product slugs - syntax mandatory w/ nextjs */
 export const getStaticPaths: GetStaticPaths = async () => {
@@ -40,50 +41,7 @@ export const getStaticProps = async ({
 export default function ProductDetail({
   product,
 }: InferGetServerSidePropsType<typeof getStaticProps>) {
-  return (
-    <div className='mb-4 px-6 py-2'>
-      <p>id: {product?.id}</p>
-      <p>name: {product?.name}</p>
-      <p>
-        price: {product?.price.value} {product?.price.currencyCode}
-      </p>
-      <p>description: {product?.description}</p>
-
-      <h3 className='mb-2 mt-4 font-bold'>Product Options</h3>
-      <div>
-        {product?.options.map(option => (
-          <div>
-            <p>option name: {option.displayName}</p>
-            {option.values.map(value => (
-              <div>
-                <p>label: {value.label}</p>
-                <p>hex: {value.hexColor}</p>
-              </div>
-            ))}
-          </div>
-        ))}
-      </div>
-      <h3 className='mb-2 mt-4 font-bold'>Product Variants</h3>
-      <div>
-        {product?.variants.map(variant => (
-          <div>
-            <p>variant name: {variant.name}</p>
-            {variant.options.map(varOpt => (
-              <div>
-                <p>var opt name: {varOpt.displayName}</p>
-                {varOpt.values.map(val => (
-                  <div>
-                    <p>label: {val.label}</p>
-                    <p>hex: {val.hexColor}</p>
-                  </div>
-                ))}
-              </div>
-            ))}
-          </div>
-        ))}
-      </div>
-    </div>
-  )
+  return <>{product && <ProductView product={product} />}</>
 }
 
 ProductDetail.Layout = Layout
