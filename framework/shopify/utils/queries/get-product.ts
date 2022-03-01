@@ -1,6 +1,6 @@
 const getProductQuery = /* javascript */ `
-  query productByHandle {
-    productByHandle(handle: "cool-hat") {
+  query productByHandle($slug: String) {
+    productByHandle(handle: $slug) {
       id
       handle
       title

@@ -1,6 +1,7 @@
 export type ApiFetchOptions = {
   url: string
   query: string
+  variables?: any
 }
 
 export type ApiFetchResult<T> = {

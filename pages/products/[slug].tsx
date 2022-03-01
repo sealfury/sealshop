@@ -23,7 +23,12 @@ export const getStaticProps = async ({
   params,
 }: GetServerSidePropsContext<{ slug: string }>) => {
   const config = getApiConfig()
-  const { product } = await getProduct(config)
+
+  // input variable to query to return only one matching product | null
+  const { product } = await getProduct({
+    config,
+    variables: { slug: params?.slug },
+  })
 
   return {
     props: {
