@@ -40,6 +40,8 @@ export const getStaticProps = async ({
 export default function ProductDetail({
   product,
 }: InferGetServerSidePropsType<typeof getStaticProps>) {
+  console.log(JSON.stringify(product, null, 2))
+
   return <div>{JSON.stringify(product, null, 2)}</div>
 }
 
