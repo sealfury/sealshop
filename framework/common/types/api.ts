@@ -1,4 +1,4 @@
-export type QueryVariables = { [key: string]: string }
+export type QueryVariables = { [key: string]: string | undefined }
 
 export type ApiFetchOptions = {
   url: string
