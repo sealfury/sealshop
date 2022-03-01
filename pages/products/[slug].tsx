@@ -4,7 +4,7 @@ import {
   GetStaticPaths,
   InferGetServerSidePropsType,
 } from 'next'
-import getAllProductPaths from '@framework/product/get-all-product-paths'
+import { getAllProductPaths, getProduct } from '@framework/product'
 import { getApiConfig } from '@framework/api/config'
 
 /* fetch product slugs - syntax mandatory w/ nextjs */
@@ -22,11 +22,12 @@ export const getStaticPaths: GetStaticPaths = async () => {
 export const getStaticProps = async ({
   params,
 }: GetServerSidePropsContext<{ slug: string }>) => {
+  const config = getApiConfig()
+  const { product } = await getProduct(config)
+
   return {
     props: {
-      product: {
-        slug: params?.slug,
-      },
+      product,
     },
   }
 }
@@ -34,7 +35,12 @@ export const getStaticProps = async ({
 export default function ProductDetail({
   product,
 }: InferGetServerSidePropsType<typeof getStaticProps>) {
-  return <div>{product.slug}</div>
+  return (
+    <div>
+      {product.name}
+      {product.slug}
+    </div>
+  )
 }
 
 ProductDetail.Layout = Layout
