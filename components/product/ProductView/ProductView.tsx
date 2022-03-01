@@ -14,8 +14,10 @@ const ProductView: React.FC<ProductViewProps> = ({ product }) => {
       <div className={classNames(s.root, 'fit')}>
         <div className={classNames(s.productDisplay, 'fit')}>
           <div className={s.nameContainer}>
-            <h1 className={s.name}>Product Name</h1>
-            <div className={s.price}>50 $</div>
+            <h1 className={s.name}>{product.name}</h1>
+            <div className={s.price}>
+              {`${product.price.value} ${product.price.currencyCode}`}
+            </div>
           </div>
           <div className={s.imageContainer}>
             <Image
@@ -37,7 +39,7 @@ const ProductView: React.FC<ProductViewProps> = ({ product }) => {
               </div>
             </div>
             <div className='pb-14 break-words w-full max-w-xl text-lg'>
-              ... Product Description To Be Added Later ...
+              {product.description}
             </div>
           </section>
           <div>
