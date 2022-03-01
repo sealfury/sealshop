@@ -24,10 +24,10 @@ export const getStaticProps = async ({
 }: GetServerSidePropsContext<{ slug: string }>) => {
   const config = getApiConfig()
 
-  // input variable to query to return only one matching product | null
+  // input variable to query to return only one matching product
   const { product } = await getProduct({
     config,
-    variables: { slug: params?.slug },
+    variables: { slug: params!.slug },
   })
 
   return {

@@ -1,7 +1,9 @@
+export type QueryVariables = { [key: string]: string }
+
 export type ApiFetchOptions = {
   url: string
   query: string
-  variables?: any
+  variables?: QueryVariables
 }
 
 export type ApiFetchResult<T> = {
