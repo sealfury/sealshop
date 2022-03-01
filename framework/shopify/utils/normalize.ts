@@ -1,4 +1,9 @@
-import { ImageEdge, MoneyV2, Product as ShopifyProduct } from '../schema'
+import {
+  ImageEdge,
+  MoneyV2,
+  Product as ShopifyProduct,
+  ProductOption,
+} from '../schema'
 import { Product } from '@common/types/product'
 
 const normalizeImages = ({ edges }: { edges: ImageEdge[] }) =>
@@ -15,6 +20,35 @@ const normalizePrice = ({ currencyCode, amount }: MoneyV2) => ({
   currencyCode,
 })
 
+/*
+ ** product options = array of objs
+ ** displayName = type of option (e.g. size, color)
+ ** values = array of objs with 'label' key which is sizes 'm', 's' etc
+ ** color/colour options are defined by color name & hex code
+ */
+const normalizeOption = ({ id, values, name: displayName }: ProductOption) => {
+  const normalized = {
+    id,
+    displayName,
+    values: values.map(value => {
+      let output: any = {
+        label: value,
+      }
+
+      if (displayName.match(/colou?r/gi)) {
+        output = {
+          ...output,
+          hexColor: value,
+        }
+      }
+
+      return output
+    }),
+  }
+
+  return normalized
+}
+
 export const normalizeProduct = (productNode: ShopifyProduct): Product => {
   const {
     id,
@@ -24,6 +58,7 @@ export const normalizeProduct = (productNode: ShopifyProduct): Product => {
     description,
     images: imageConnection,
     priceRange,
+    options,
     ...rest
   } = productNode
 
@@ -36,6 +71,11 @@ export const normalizeProduct = (productNode: ShopifyProduct): Product => {
     slug: handle.replace(/^\/+|\/+$/g, ''), // remove /'s from beginning and end
     images: normalizeImages(imageConnection),
     price: normalizePrice(priceRange.minVariantPrice),
+    options: options
+      ? options
+          .filter(option => option.name !== 'Title')
+          .map(opt => normalizeOption(opt))
+      : [],
     ...rest,
   }
 
