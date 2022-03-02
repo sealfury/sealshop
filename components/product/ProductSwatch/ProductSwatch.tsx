@@ -7,13 +7,20 @@ interface SwatchProps {
   color?: string
   label?: string
   variant?: SwatchVariant
+  onClick: () => void
 }
 
-const ProductSwatch: React.FC<SwatchProps> = ({ color, label, variant }) => {
+const ProductSwatch: React.FC<SwatchProps> = ({
+  color,
+  label,
+  variant,
+  ...rest
+}) => {
   return (
     <button
       className={s.swatchRoot}
       style={color ? { backgroundColor: color } : {}}
+      {...rest}
     >
       {/* <span>
         <Selected />

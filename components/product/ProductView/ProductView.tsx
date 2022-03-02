@@ -1,4 +1,5 @@
 import s from './ProductView.module.css'
+import { useState } from 'react'
 import Image from 'next/image'
 import classNames from 'classnames'
 import { Container, Button } from '@components/ui'
@@ -10,6 +11,9 @@ interface ProductViewProps {
 }
 
 const ProductView: React.FC<ProductViewProps> = ({ product }) => {
+  const [choices, setChoices] = useState({})
+  console.log(choices)
+
   return (
     <Container>
       <div className={classNames(s.root, 'fit', 'mb-5')}>
@@ -47,12 +51,18 @@ const ProductView: React.FC<ProductViewProps> = ({ product }) => {
                       label={value.label}
                       color={value.hexColor}
                       variant={option.displayName}
+                      onClick={() => {
+                        setChoices({
+                          ...choices,
+                          [option.displayName.toLowerCase()]:
+                            value.label.toLowerCase(),
+                        })
+                      }}
                     />
                   ))}
                 </div>
               </div>
             ))}
-
             <div className='pb-14 break-words w-full max-w-xl text-lg'>
               {product.description}
             </div>
