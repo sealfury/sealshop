@@ -12,12 +12,12 @@ interface ProductViewProps {
 const ProductView: React.FC<ProductViewProps> = ({ product }) => {
   return (
     <Container>
-      <div className={classNames(s.root, 'fit')}>
+      <div className={classNames(s.root, 'fit', 'mb-5')}>
         <div className={classNames(s.productDisplay, 'fit')}>
           <div className={s.nameContainer}>
             <h1 className={s.name}>{product.name}</h1>
             <div className={s.price}>
-              {`${product.price.value} ${product.price.currencyCode}`}
+              {product.price.value} {` `} {product.price.currencyCode}
             </div>
           </div>
           <ProductSlider>
