@@ -10,8 +10,14 @@ interface ProductViewProps {
   product: ProductType
 }
 
+type PossibleChoices = 'color' | 'size' | string
+
+type ProductChoices = {
+  [P in PossibleChoices]: string
+}
+
 const ProductView: React.FC<ProductViewProps> = ({ product }) => {
-  const [choices, setChoices] = useState({})
+  const [choices, setChoices] = useState<ProductChoices>({})
   console.log(choices)
 
   return (
