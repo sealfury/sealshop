@@ -1,13 +1,14 @@
 import s from './Button.module.css'
-import { ReactNode } from 'react'
+import { ButtonHTMLAttributes, ReactNode, FC } from 'react'
+import classNames from 'classnames'
 
-interface ButtonProps {
+interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   children: ReactNode | ReactNode[]
 }
 
-const Button: React.FC<ButtonProps> = ({ children }) => {
+const Button: FC<ButtonProps> = ({ children, className, ...rest }) => {
   return (
-    <button className={s.root} type='button'>
+    <button className={classNames(s.root, className)} type='button' {...rest}>
       {children}
     </button>
   )
