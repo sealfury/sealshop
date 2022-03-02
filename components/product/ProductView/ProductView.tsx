@@ -37,12 +37,19 @@ const ProductView: React.FC<ProductViewProps> = ({ product }) => {
         </div>
         <div className={s.sidebar}>
           <section>
-            <div className='pb-4'>
-              <h2 className='uppercase font-medium'>Color</h2>
-              <div className='flex flex-row py-4'>
-                ... Variant Options To Be Added Later ...
+            {product.options.map(option => (
+              <div key={product.id} className='pb-4'>
+                <h2 className='uppercase font-medium'>{option.displayName}</h2>
+                <div className='flex flex-row py-4'>
+                  {option.values.map(value => (
+                    <div key={`${option.id}-${value.hexColor}`}>
+                      {value.label}
+                    </div>
+                  ))}
+                </div>
               </div>
-            </div>
+            ))}
+
             <div className='pb-14 break-words w-full max-w-xl text-lg'>
               {product.description}
             </div>
