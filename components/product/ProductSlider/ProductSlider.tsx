@@ -1,8 +1,9 @@
+import s from './ProductSlider.module.css'
 
 const ProductSlider: React.FC = ({ children }) => {
   return (
-    <div>
-      {children}
+    <div className={s.root}>
+      <div className='h-full transition-opacity'>{children}</div>
     </div>
   )
 }

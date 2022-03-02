@@ -3,6 +3,7 @@ import Image from 'next/image'
 import classNames from 'classnames'
 import { Container } from '@components/ui'
 import { ProductType } from '@common/types/product'
+import { ProductSlider } from '@components/product'
 
 interface ProductViewProps {
   product: ProductType
@@ -19,16 +20,20 @@ const ProductView: React.FC<ProductViewProps> = ({ product }) => {
               {`${product.price.value} ${product.price.currencyCode}`}
             </div>
           </div>
-          <div className={s.imageContainer}>
-            <Image
-              className={s.image}
-              src={'/mr-seal-yo-girl.svg'}
-              alt={'Temp Product Image'}
-              width={1050}
-              height={1050}
-              quality='85'
-            />
-          </div>
+          <ProductSlider>
+            {product.images.map(img => (
+              <div key={img.url} className={s.imageContainer}>
+                <Image
+                  className={s.image}
+                  src={img.url}
+                  alt={img.alt}
+                  width={1050}
+                  height={1050}
+                  quality='85'
+                />
+              </div>
+            ))}
+          </ProductSlider>
         </div>
         <div className={s.sidebar}>
           <section>

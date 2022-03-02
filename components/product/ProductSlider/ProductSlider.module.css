@@ -1,0 +1,4 @@
+.root {
+  @apply relative w-full h-full;
+  overflow-y: hidden;
+}
