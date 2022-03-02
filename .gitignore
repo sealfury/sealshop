@@ -1,6 +1,9 @@
 # temp schema types
 schema.d.ts
 
+# scratch files
+scratch.*
+
 # compiled/minified post-css output
 /assets/main_browser.css
 
