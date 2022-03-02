@@ -3,7 +3,7 @@ import Image from 'next/image'
 import classNames from 'classnames'
 import { Container, Button } from '@components/ui'
 import { ProductType } from '@common/types/product'
-import { ProductSlider } from '@components/product'
+import { ProductSlider, ProductSwatch } from '@components/product'
 
 interface ProductViewProps {
   product: ProductType
@@ -38,13 +38,15 @@ const ProductView: React.FC<ProductViewProps> = ({ product }) => {
         <div className={s.sidebar}>
           <section>
             {product.options.map(option => (
-              <div key={product.id} className='pb-4'>
+              <div key={option.id} className='pb-4'>
                 <h2 className='uppercase font-medium'>{option.displayName}</h2>
                 <div className='flex flex-row py-4'>
                   {option.values.map(value => (
-                    <div key={`${option.id}-${value.hexColor}`}>
-                      {value.label}
-                    </div>
+                    <ProductSwatch
+                      key={`${option.id}-${value.label}`}
+                      label={value.label}
+                      color={value.hexColor}
+                    />
                   ))}
                 </div>
               </div>
