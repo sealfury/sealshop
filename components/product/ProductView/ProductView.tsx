@@ -10,10 +10,10 @@ interface ProductViewProps {
   product: ProductType
 }
 
-type PossibleChoices = 'color' | 'size' | string
+type AvailableChoices = 'color' | 'size' | string
 
 type ProductChoices = {
-  [P in PossibleChoices]: string
+  [P in AvailableChoices]: string
 }
 
 const ProductView: React.FC<ProductViewProps> = ({ product }) => {
@@ -51,21 +51,27 @@ const ProductView: React.FC<ProductViewProps> = ({ product }) => {
               <div key={option.id} className='pb-4'>
                 <h2 className='uppercase font-medium'>{option.displayName}</h2>
                 <div className='flex flex-row py-4'>
-                  {option.values.map(value => (
-                    <ProductSwatch
-                      key={`${option.id}-${value.label}`}
-                      label={value.label}
-                      color={value.hexColor}
-                      variant={option.displayName}
-                      onClick={() => {
-                        setChoices({
-                          ...choices,
-                          [option.displayName.toLowerCase()]:
-                            value.label.toLowerCase(),
-                        })
-                      }}
-                    />
-                  ))}
+                  {option.values.map(value => {
+                    // specific size (s, m, l) / color ('black') choice from swatch option
+                    const activeChoice =
+                      choices[option.displayName.toLowerCase()]
+                    return (
+                      <ProductSwatch
+                        key={`${option.id}-${value.label}`}
+                        label={value.label}
+                        color={value.hexColor}
+                        variant={option.displayName}
+                        active={value.label.toLowerCase() === activeChoice}
+                        onClick={() => {
+                          setChoices({
+                            ...choices,
+                            [option.displayName.toLowerCase()]:
+                              value.label.toLowerCase(),
+                          })
+                        }}
+                      />
+                    )
+                  })}
                 </div>
               </div>
             ))}
