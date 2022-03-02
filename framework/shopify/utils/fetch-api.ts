@@ -3,6 +3,7 @@ import { ApiFetchOptions, ApiFetchResult } from '@common/types/api'
 const fetchApi = async <T>({
   url,
   query,
+  variables,
 }: ApiFetchOptions): Promise<ApiFetchResult<T>> => {
   const response = await fetch(url, {
     method: 'POST',
@@ -11,6 +12,7 @@ const fetchApi = async <T>({
     },
     body: JSON.stringify({
       query,
+      variables,
     }),
   })
 

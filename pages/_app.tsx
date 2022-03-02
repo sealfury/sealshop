@@ -1,4 +1,5 @@
 import '@assets/main.css'
+import 'keen-slider/keen-slider.min.css'
 import { UIContextProvider } from '@components/ui/context'
 import { AppProps } from 'next/app'
 
