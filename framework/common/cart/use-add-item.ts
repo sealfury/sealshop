@@ -1,9 +1,7 @@
+import { hookHandler } from "@framework/cart/use-add-item"
+
 const useAddItem = () => {
-  return (input: any) => {
-    return {
-      data: JSON.stringify(input) + 'with data!',
-    }
-  }
+  return hookHandler.useHook()
 }
 
 export default useAddItem
