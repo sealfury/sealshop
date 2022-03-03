@@ -8,6 +8,7 @@ import { ProductSlider, ProductSwatch } from '@components/product'
 import { ProductChoices, getVariant } from '../utils'
 import { useUIContext } from '@components/ui/context'
 import useAddItem from '@framework/cart/use-add-item'
+import { useApiProvider } from '@common'
 
 interface ProductViewProps {
   product: ProductType
@@ -15,6 +16,8 @@ interface ProductViewProps {
 
 const ProductView: React.FC<ProductViewProps> = ({ product }) => {
   const [choices, setChoices] = useState<ProductChoices>({})
+  const apiProvider = useApiProvider()
+  console.log(apiProvider)
   const { openSidebar } = useUIContext()
   const addItem = useAddItem()
 
