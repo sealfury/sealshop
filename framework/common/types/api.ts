@@ -12,11 +12,20 @@ export type ApiFetchResult<T> = {
 
 export interface ApiConfig {
   apiUrl: string
-  fetch<T>(options: ApiFetchOptions): Promise<ApiFetchResult<T>>
+  fetch: ApiFetcherType
 }
 
 export interface ApiHooks {
   cart: {
     useAddItem: any
   }
+}
+
+export type ApiFetcherType<T = any> = (
+  options: ApiFetchOptions
+) => Promise<ApiFetchResult<T>>
+
+export interface ApiProviderContext {
+  hooks: ApiHooks
+  fetcher: ApiFetcherType
 }

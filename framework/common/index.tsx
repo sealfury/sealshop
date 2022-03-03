@@ -1,5 +1,5 @@
 import { createContext, ReactNode, useContext, useMemo } from 'react'
-import { ApiConfig, ApiHooks } from './types/api'
+import { ApiConfig, ApiHooks, ApiProviderContext } from './types/api'
 
 export interface ApiProviderProps {
   children: ReactNode | ReactNode[]
@@ -7,7 +7,7 @@ export interface ApiProviderProps {
   hooks: ApiHooks
 }
 
-export const ApiContext = createContext({})
+export const ApiContext = createContext<Partial<ApiProviderContext>>({})
 
 export const ApiProvider = ({
   children,
@@ -17,7 +17,7 @@ export const ApiProvider = ({
   const commonApiConfig = useMemo(() => {
     return {
       fetcher: apiConfig.fetch,
-      hooks
+      hooks,
     }
   }, [apiConfig.fetch, hooks])
 
@@ -28,4 +28,4 @@ export const ApiProvider = ({
   )
 }
 
-export const useApiProvider = () => useContext(ApiContext)
+export const useApiProvider = () => useContext(ApiContext) as ApiProviderContext

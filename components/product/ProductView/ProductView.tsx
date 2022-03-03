@@ -16,8 +16,8 @@ interface ProductViewProps {
 
 const ProductView: React.FC<ProductViewProps> = ({ product }) => {
   const [choices, setChoices] = useState<ProductChoices>({})
-  const apiProvider = useApiProvider()
-  console.log(apiProvider)
+  const { hooks, fetcher } = useApiProvider()
+
   const { openSidebar } = useUIContext()
   const addItem = useAddItem()
 
