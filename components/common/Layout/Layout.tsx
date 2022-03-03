@@ -3,7 +3,7 @@ import { Footer, Navbar } from '@components/common'
 import { Sidebar } from '@components/ui'
 import { CartSidebar } from '@components/cart'
 import { useUIContext } from '@components/ui/context'
-import { ApiProvider } from '@common'
+import { ApiProvider } from '@framework'
 
 const Layout: React.FC = ({ children }) => {
   const { sidebarOpen, closeSidebar } = useUIContext()
