@@ -14,3 +14,9 @@ export interface ApiConfig {
   apiUrl: string
   fetch<T>(options: ApiFetchOptions): Promise<ApiFetchResult<T>>
 }
+
+export interface ApiHooks {
+  cart: {
+    useAddItem: any
+  }
+}
