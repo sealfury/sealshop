@@ -1,4 +1,4 @@
-import { colorMap } from "./color-map"
+import { colorMap } from './color-map'
 
 export const hexToRgb = (hex: string = '') => {
   // @ts-ignore
@@ -27,3 +27,12 @@ export const hexToRgb = (hex: string = '') => {
   return [r, g, b]
 }
 
+export const isDark = (color: string = ''): boolean => {
+  color = color.toLowerCase()
+
+  // Equation from http://24ways.org/2010/calculating-color-contrast
+  let rgb = colorMap[color] ? hexToRgb(colorMap[color]) : hexToRgb(color)
+  const result = (rgb[0] * 299 + rgb[1] * 587 + rgb[2] * 114) / 1000
+
+  return result < 128
+}
