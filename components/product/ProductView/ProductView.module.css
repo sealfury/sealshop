@@ -47,7 +47,7 @@
   @screen lg {
     & .name,
     & .price {
-      @apply bg-violet-light text-white;
+      @apply bg-accents-9 text-white;
     }
   }
 }

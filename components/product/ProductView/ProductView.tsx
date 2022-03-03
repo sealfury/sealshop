@@ -45,6 +45,7 @@ const ProductView: React.FC<ProductViewProps> = ({ product }) => {
             {product.images.map(img => (
               <div key={img.url} className={s.imageContainer}>
                 <Image
+                  priority
                   className={s.image}
                   src={img.url}
                   alt={img.alt}
