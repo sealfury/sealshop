@@ -1,6 +1,7 @@
 import s from './ProductSwatch.module.css'
 import classNames from 'classnames'
 import { Check } from '@components/icons'
+import { isDark } from '@lib/color-utils'
 
 type SwatchVariant = 'size' | 'color' | string
 
@@ -26,6 +27,7 @@ const ProductSwatch: React.FC<SwatchProps> = ({
     [s.active]: active,
     [s.color]: color,
     [s.size]: variant === 'size',
+    [s.dark]: color && isDark(color),
   })
 
   return (
