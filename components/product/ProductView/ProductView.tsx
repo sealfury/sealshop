@@ -5,20 +5,31 @@ import classNames from 'classnames'
 import { Container, Button } from '@components/ui'
 import { ProductType } from '@common/types/product'
 import { ProductSlider, ProductSwatch } from '@components/product'
+import { ProductChoices, getVariant } from '../utils'
+import { useUIContext } from '@components/ui/context'
 
 interface ProductViewProps {
   product: ProductType
 }
 
-type AvailableChoices = 'color' | 'size' | string
-
-type ProductChoices = {
-  [P in AvailableChoices]: string
-}
-
 const ProductView: React.FC<ProductViewProps> = ({ product }) => {
   const [choices, setChoices] = useState<ProductChoices>({})
-  console.log(choices)
+  const { openSidebar } = useUIContext()
+
+  const variant = getVariant(product, choices)
+
+  const addToCart = () => {
+    try {
+      const itemToAdd = {
+        productId: String(product.id),
+        variantId: variant?.id,
+        variantOptions: variant?.options,
+      }
+
+      alert(JSON.stringify(itemToAdd))
+      openSidebar()
+    } catch {}
+  }
 
   return (
     <Container>
@@ -80,10 +91,7 @@ const ProductView: React.FC<ProductViewProps> = ({ product }) => {
             </div>
           </section>
           <div>
-            <Button
-              className={s.button}
-              onClick={() => alert('clicking add to cart')}
-            >
+            <Button className={s.button} onClick={addToCart}>
               Add To Cart
             </Button>
           </div>

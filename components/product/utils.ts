@@ -8,6 +8,7 @@ export type ProductChoices = {
 
 export const getVariant = (product: ProductType, choices: ProductChoices) =>
   // check if every variant option included in 'choices'
+  // variant must be combination of available options! (size + color etc)
   product.variants.find(variant => {
     return variant.options.every(variantOpt => {
       const optionName = variantOpt.displayName.toLowerCase()
