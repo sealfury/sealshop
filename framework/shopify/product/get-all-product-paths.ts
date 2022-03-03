@@ -20,7 +20,6 @@ const getAllProductPaths = async (config: ApiConfig): Promise<ReturnType> => {
     }
   })
 
-  console.log(products)
   return { products }
 }
 
