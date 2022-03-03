@@ -8,8 +8,18 @@ export type ProductChoices = {
 
 export const getVariant = (product: ProductType, choices: ProductChoices) => {
   const variant = product.variants.find(variant => {
-    console.log(variant)
-    return false
+    // check if every variant option included in 'choices'
+    const matchesChoice = variant.options.every(variantOpt => {
+      const optionName = variantOpt.displayName.toLowerCase()
+
+      if (optionName in choices) {
+        if (choices[optionName] === variantOpt.values[0].label) {
+          return true
+        }
+      }
+      return false
+    })
+    return matchesChoice
   })
 
   return variant
