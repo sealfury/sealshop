@@ -6,7 +6,7 @@ const useAddItem = () => {
   })
 
   return hook.useHook({
-    fetch: hook.useFetcher,
+    fetch: hook.fetcher,
   })
 }
 
