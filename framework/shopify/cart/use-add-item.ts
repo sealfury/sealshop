@@ -3,14 +3,15 @@ import { useAddItem } from '@common/cart'
 export default useAddItem
 
 export const hookHandler = {
-  useFetcher: () => {
-    console.log('Fetching Data')
+  useFetcher: (input: any) => {
+    return JSON.stringify(input) + ' with data!'
   },
-  useHook: () => {
+  useHook: ({ fetch }: any) => {
     return (input: any) => {
+      const response = fetch(input)
       return {
-        data: JSON.stringify(input) + 'with data!',
+        data: response,
       }
     }
-  }
+  },
 }
