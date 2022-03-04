@@ -7,6 +7,7 @@ import { ProductType } from '@common/types/product'
 import { ProductSlider, ProductSwatch } from '@components/product'
 import { ProductChoices, getVariant } from '../utils'
 import { useUIContext } from '@components/ui/context'
+import useAddItem from '@framework/cart/use-add-item'
 
 interface ProductViewProps {
   product: ProductType
@@ -14,11 +15,13 @@ interface ProductViewProps {
 
 const ProductView: React.FC<ProductViewProps> = ({ product }) => {
   const [choices, setChoices] = useState<ProductChoices>({})
+
   const { openSidebar } = useUIContext()
+  const addItem = useAddItem()
 
   const variant = getVariant(product, choices)
 
-  const addToCart = () => {
+  const addToCart = async () => {
     try {
       const itemToAdd = {
         productId: String(product.id),
@@ -26,9 +29,12 @@ const ProductView: React.FC<ProductViewProps> = ({ product }) => {
         variantOptions: variant?.options,
       }
 
-      alert(JSON.stringify(itemToAdd))
+      const output = await addItem(itemToAdd)
+      alert(JSON.stringify(output))
       openSidebar()
-    } catch {}
+    } catch (err) {
+      console.error(err)
+    }
   }
 
   return (
@@ -45,6 +51,7 @@ const ProductView: React.FC<ProductViewProps> = ({ product }) => {
             {product.images.map(img => (
               <div key={img.url} className={s.imageContainer}>
                 <Image
+                  priority
                   className={s.image}
                   src={img.url}
                   alt={img.alt}

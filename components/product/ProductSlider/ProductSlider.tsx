@@ -14,7 +14,7 @@ const ProductSlider: React.FC = ({ children }) => {
     },
   })
 
-  console.log(currentSlide)
+  console.log(`slide index: ${currentSlide}`)
 
   return (
     <div className={s.root}>

@@ -9,7 +9,6 @@ type TempReturnType = {
 
 const getAllProducts = async (config: ApiConfig): Promise<ProductType[]> => {
   const { data } = await config.fetch<TempReturnType>({
-    url: config.apiUrl,
     query: getAllProductsQuery,
   })
 
