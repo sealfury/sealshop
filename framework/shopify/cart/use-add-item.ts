@@ -20,8 +20,6 @@ export const hookHandler: MutationHook = {
       ],
     }
 
-    debugger
-
     const res = await fetch({
       ...options,
       variables,
@@ -32,7 +30,7 @@ export const hookHandler: MutationHook = {
     return async (input: any) => {
       const response = await fetch(input)
       return {
-        data: response,
+        output: response,
       }
     }
   },

@@ -13,6 +13,8 @@ export const useCartHandler = {
   },
   useHook: ({ fetch }: any) => {
     const data = fetch()
-    return data
+    return {
+      data,
+    }
   },
 }
