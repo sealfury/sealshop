@@ -11,7 +11,6 @@ const getAllProductPaths = async (config: ApiConfig): Promise<ReturnType> => {
   // retrieve slug for path from schema
   const { data } = await config.fetch<{ products: ProductConnection }>({
     query: getAllProductPathsQuery,
-    url: config.apiUrl,
   })
 
   const products = data.products.edges.map(({ node: { handle } }) => {
