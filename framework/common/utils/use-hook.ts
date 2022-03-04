@@ -7,3 +7,16 @@ export const useHook = (cb: (apiHooks: ApiHooks) => MutationHook) => {
 
   return cb(hooks)
 }
+
+export const useMutationHook = (hook: MutationHook) => {
+  return hook.useHook({
+    fetch: (input: any) => {
+      return hook.fetcher({
+        input,
+        fetch: (input: any) => {
+          return JSON.stringify(input) + ' with data!'
+        },
+      })
+    },
+  })
+}
