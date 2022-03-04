@@ -13,8 +13,10 @@ export const useMutationHook = (hook: MutationHook) => {
     fetch: (input: any) => {
       return hook.fetcher({
         input,
-        fetch: (input: any) => {
-          return JSON.stringify(input) + ' with data!'
+        fetch: async (input: any) => {
+          return {
+            data: JSON.stringify(input) + ' with data!',
+          }
         },
       })
     },
