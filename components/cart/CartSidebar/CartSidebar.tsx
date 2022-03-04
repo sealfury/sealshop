@@ -2,10 +2,13 @@ import Link from 'next/link'
 import classNames from 'classnames'
 import { Bag as CartIcon, Cross as CloseIcon } from '@components/icons'
 import { useUIContext } from '@components/ui/context'
+import useCart from '@framework/cart/use-cart'
 
 const CartSidebar: React.FC = () => {
   const isEmpty = true
   const { closeSidebar } = useUIContext()
+  const cart = useCart()
+  console.log(cart)
 
   const rootClass = classNames('h-full flex flex-col', {
     'bg-secondary text-secondary': isEmpty,
