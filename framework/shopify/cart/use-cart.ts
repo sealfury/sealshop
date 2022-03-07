@@ -11,6 +11,7 @@ export const useCartHandler = {
   async fetcher({ fetch, options, input: { checkoutId } }: any) {
     let checkout
 
+    debugger
     // get checkout from id
     if (checkoutId) {
       const { data } = await fetch({ ...options })
