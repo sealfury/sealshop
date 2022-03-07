@@ -1,4 +1,5 @@
 import useCart from '@common/cart/use-cart'
+import { createCheckout } from '@framework/utils'
 
 export default useCart
 
@@ -8,14 +9,19 @@ export const useCartHandler = {
     query: 'query { hello }',
   },
   async fetcher({ fetch, options, input: { checkoutId } }: any) {
-    const data = await fetch({ ...options })
-    // get checkout id
-    console.log(checkoutId)
+    let checkout
+
     // get checkout from id
+    if (checkoutId) {
+      const { data } = await fetch({ ...options })
 
-    // if no checkout, create it
-
-    return { data }
+      checkout = data.node
+    } else {
+      // if no checkout, create it
+      checkout = await createCheckout()
+    }
+    
+    return checkout
   },
   useHook: ({ useData }: any) => {
     const data = useData()

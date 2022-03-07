@@ -14,8 +14,6 @@ const ProductSlider: React.FC = ({ children }) => {
     },
   })
 
-  console.log(`slide index: ${currentSlide}`)
-
   return (
     <div className={s.root}>
       <div ref={sliderRef} className='keen-slider h-full transition-opacity'>
