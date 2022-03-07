@@ -18,9 +18,10 @@ export const ApiProvider = ({
   const commonApiConfig = useMemo(() => {
     return {
       fetcher: apiConfig.fetch,
+      checkoutCookie: apiConfig.checkoutCookie,
       hooks,
     }
-  }, [apiConfig.fetch, hooks])
+  }, [apiConfig.fetch, apiConfig.checkoutCookie, hooks])
 
   return (
     <ApiContext.Provider value={commonApiConfig}>

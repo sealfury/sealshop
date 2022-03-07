@@ -1,4 +1,4 @@
-import { ApiHooks } from "./hooks"
+import { ApiHooks } from './hooks'
 
 export type QueryVariables = { [key: string]: string | any | undefined }
 
@@ -13,6 +13,7 @@ export type ApiFetchResult<T> = {
 
 export interface ApiConfig {
   fetch<T>(options: ApiFetchOptions): Promise<ApiFetchResult<T>>
+  checkoutCookie: string
 }
 
 export type ApiFetcherType<T = any> = (
@@ -22,4 +23,5 @@ export type ApiFetcherType<T = any> = (
 export interface ApiProviderContext {
   hooks: ApiHooks
   fetcher: ApiFetcherType
+  checkoutCookie: string
 }
