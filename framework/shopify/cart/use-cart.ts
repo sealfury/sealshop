@@ -18,9 +18,9 @@ export const useCartHandler = {
       checkout = data.node
     } else {
       // if no checkout, create it
-      checkout = await createCheckout()
+      checkout = await createCheckout(fetch)
     }
-    
+
     return checkout
   },
   useHook: ({ useData }: any) => {
