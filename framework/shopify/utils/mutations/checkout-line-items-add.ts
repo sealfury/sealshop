@@ -1,4 +1,4 @@
-const checkoutLineItemsAdd = /*javascript*/ `
+const checkoutLineItemsAdd = `
   mutation(
     $checkoutId: ID!,
     $lineItems: [CheckoutLineItemInput!]! ) {
