@@ -1,3 +1,5 @@
+import { ProductOption, ProductVariant } from './product'
+
 export interface Discount {
   value: number
 }
@@ -11,4 +13,16 @@ export interface Cart {
   currency: { code: string }
   lineItems: any[]
   discounts: Discount[]
+}
+
+export interface LineItem {
+  id: string
+  variantId: string
+  productId: string
+  name: string
+  path: string
+  quantity: number
+  discounts: Discount[]
+  variant: Partial<ProductVariant>
+  options?: ProductOption[]
 }

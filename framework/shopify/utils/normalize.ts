@@ -9,7 +9,7 @@ import {
   SelectedOption,
 } from '../schema'
 import { ProductType } from '@common/types/product'
-import { Cart } from '@common/types/cart'
+import { Cart, LineItem } from '@common/types/cart'
 
 const normalizeImages = ({ edges }: { edges: ImageEdge[] }) =>
   edges.map(({ node: { originalSrc: url, ...rest } }) => {
@@ -78,13 +78,13 @@ const normalizeVariants = ({ edges }: ProductVariantConnection) => {
       sku: sku || id,
       price: +priceV2.amount,
       listPrice: +compareAtPriceV2.amount,
-      shippingNeeded: true,
+      shipping: true,
       options: getVariantOptions,
     }
   })
 }
 
-export const normalizeProduct = (productNode: ShopifyProduct): ProductType => {
+export function normalizeProduct(productNode: ShopifyProduct): ProductType {
   const {
     id,
     title: name,
@@ -103,14 +103,12 @@ export const normalizeProduct = (productNode: ShopifyProduct): ProductType => {
     name,
     vendor,
     description,
-    path: `/${handle}`, // slugified title
-    slug: handle.replace(/^\/+|\/+$/g, ''), // remove /'s from beginning and end
+    path: `/${handle}`,
+    slug: handle.replace(/^\/+|\/+$/g, ''),
     images: normalizeImages(imageConnection),
     price: normalizePrice(priceRange.minVariantPrice),
     options: options
-      ? options
-          .filter(option => option.name !== 'Title')
-          .map(opt => normalizeOption(opt))
+      ? options.filter(o => o.name !== 'Title').map(o => normalizeOption(o))
       : [],
     variants: variants ? normalizeVariants(variants) : [],
     ...rest,
@@ -121,7 +119,7 @@ export const normalizeProduct = (productNode: ShopifyProduct): ProductType => {
 
 export const normalizeLineItem = ({
   node: { id, title, variant, ...rest },
-}: CheckoutLineItemEdge): any => {
+}: CheckoutLineItemEdge): LineItem => {
   return {
     id,
     name: title,
@@ -135,9 +133,19 @@ export const normalizeLineItem = ({
       shipping: variant?.requiresShipping ?? false,
       price: variant?.priceV2.amount,
       listPrice: variant?.compareAtPriceV2?.amount,
+      image: {
+        url:
+          process.env.NEXT_PUBLIC_FRAMEWORK === 'shopify_local'
+            ? `/public/images/${variant?.image?.originalSrc}`
+            : variant?.image?.originalSrc ?? '/mr-seal-yo-girl.svg',
+      },
     },
-    // options {}
     discounts: [],
+    options: variant?.selectedOptions.map(({ name, value }: SelectedOption) => {
+      const option = normalizeOption({ id, name, values: [value] })
+
+      return option
+    }),
     ...rest,
   }
 }
