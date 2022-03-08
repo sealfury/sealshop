@@ -7,8 +7,8 @@ import useCart from '@framework/cart/use-cart'
 const CartSidebar: React.FC = () => {
   const isEmpty = true
   const { closeSidebar } = useUIContext()
-  const cart = useCart()
-  console.log(cart)
+  const { data } = useCart()
+  console.log(data)
 
   const rootClass = classNames('h-full flex flex-col', {
     'bg-secondary text-secondary': isEmpty,

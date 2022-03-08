@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import useSWR from 'swr'
 import { useApiProvider } from '@common'
 import { ApiHooks } from '@common/types/hooks'
 import { MutationHook } from '@common/types/hooks'
@@ -25,13 +25,11 @@ export const useMutationHook = (hook: MutationHook) => {
 }
 
 export const useData = (hook: any, fetcher: ApiFetcherType) => {
-  const [data, setData] = useState(null)
-
-  const hookFetcher = async () => {
+  const hookFetcher = async (query: string) => {
     try {
       return await hook.fetcher({
         fetch: fetcher,
-        options: hook.fetcherOptions,
+        options: { query },
         input: {},
       })
     } catch (err) {
@@ -39,13 +37,9 @@ export const useData = (hook: any, fetcher: ApiFetcherType) => {
     }
   }
 
-  if (!data) {
-    hookFetcher().then(data => {
-      setData(data)
-    })
-  }
+  const res = useSWR(hook.fetcherOptions.query, hookFetcher)
 
-  return data
+  return res
 }
 
 // stale while revalidate - see nexjs docs

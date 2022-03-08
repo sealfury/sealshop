@@ -1,3 +1,4 @@
+import { useMemo } from 'react'
 import useCart from '@common/cart/use-cart'
 import { createCheckout, getCheckoutQuery } from '@framework/utils'
 
@@ -29,8 +30,9 @@ export const useCartHandler = {
   },
   useHook: ({ useData }: any) => {
     const data = useData()
-    return {
-      data,
-    }
+
+    return useMemo(() => {
+      return data
+    }, [data])
   },
 }
