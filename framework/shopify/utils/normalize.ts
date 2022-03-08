@@ -1,5 +1,6 @@
 import {
   Checkout,
+  CheckoutLineItemEdge,
   ImageEdge,
   MoneyV2,
   Product as ShopifyProduct,
@@ -118,6 +119,29 @@ export const normalizeProduct = (productNode: ShopifyProduct): ProductType => {
   return product
 }
 
+export const normalizeLineItem = ({
+  node: { id, title, variant, ...rest },
+}: CheckoutLineItemEdge): any => {
+  return {
+    id,
+    name: title,
+    productId: String(variant?.id),
+    variantId: String(variant?.id),
+    path: variant?.product?.handle ?? '',
+    variant: {
+      id: String(variant?.id),
+      sku: variant?.sku ?? '',
+      name: variant?.title,
+      shipping: variant?.requiresShipping ?? false,
+      price: variant?.priceV2.amount,
+      listPrice: variant?.compareAtPriceV2?.amount,
+    },
+    // options {}
+    discounts: [],
+    ...rest,
+  }
+}
+
 export const normalizeCart = (checkout: Checkout): Cart => {
   return {
     id: checkout.id,
@@ -127,7 +151,7 @@ export const normalizeCart = (checkout: Checkout): Cart => {
     },
     taxes: checkout.taxesIncluded,
     lineItemSubtotal: +checkout.subtotalPriceV2.amount,
-    lineItems: checkout.lineItems.edges.map(edge => edge.node),
+    lineItems: checkout.lineItems.edges.map(normalizeLineItem),
     totalPrice: checkout.totalPriceV2.amount,
     discounts: [],
   }

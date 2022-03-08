@@ -7,6 +7,7 @@ import { useCart } from '@common/cart'
 const UserNav: React.FC = () => {
   const { openSidebar } = useUIContext()
   const { data } = useCart()
+  debugger
 
   return (
     <nav>
