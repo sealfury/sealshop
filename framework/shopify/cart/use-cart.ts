@@ -11,8 +11,7 @@ export const useCartHandler = {
   async fetcher({ fetch, options, input: { checkoutId } }: any) {
     let checkout
 
-    debugger
-    // get checkout from id
+    // get checkout data from id
     if (checkoutId) {
       const { data } = await fetch({
         ...options,
@@ -23,7 +22,6 @@ export const useCartHandler = {
 
       checkout = data.node
     } else {
-      // if no checkout, create it
       checkout = await createCheckout(fetch)
     }
 
