@@ -1,6 +1,10 @@
 import { useMemo } from 'react'
 import useCart from '@common/cart/use-cart'
-import { createCheckout, getCheckoutQuery } from '@framework/utils'
+import {
+  checkoutCart,
+  createCheckout,
+  getCheckoutQuery,
+} from '@framework/utils'
 
 export default useCart
 
@@ -26,13 +30,16 @@ export const useCartHandler = {
       checkout = await createCheckout(fetch)
     }
 
-    return checkout
+    const cart = checkoutCart(checkout)
+
+    return cart
   },
+
   useHook: ({ useData }: any) => {
     const data = useData({
       swrOptions: {
-        revalidateOnFocus: false
-      }
+        revalidateOnFocus: false,
+      },
     })
 
     return useMemo(() => {

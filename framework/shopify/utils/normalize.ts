@@ -1,4 +1,5 @@
 import {
+  Checkout,
   ImageEdge,
   MoneyV2,
   Product as ShopifyProduct,
@@ -7,6 +8,7 @@ import {
   SelectedOption,
 } from '../schema'
 import { ProductType } from '@common/types/product'
+import { Cart } from '@common/types/cart'
 
 const normalizeImages = ({ edges }: { edges: ImageEdge[] }) =>
   edges.map(({ node: { originalSrc: url, ...rest } }) => {
@@ -114,4 +116,19 @@ export const normalizeProduct = (productNode: ShopifyProduct): ProductType => {
   }
 
   return product
+}
+
+export const normalizeCart = (checkout: Checkout): Cart => {
+  return {
+    id: checkout.id,
+    createdAt: checkout.createdAt,
+    currency: {
+      code: checkout.totalPriceV2.currencyCode,
+    },
+    taxes: checkout.taxesIncluded,
+    lineItemSubtotal: +checkout.subtotalPriceV2.amount,
+    lineItems: checkout.lineItems.edges.map(edge => edge.node),
+    totalPrice: checkout.totalPriceV2.amount,
+    discounts: [],
+  }
 }
